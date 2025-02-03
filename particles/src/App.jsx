@@ -7,19 +7,7 @@ function App() {
   //   state.gl.setClearColor("yellow",0.5);
   // }
   return (
-    <Canvas
-      gl={{ antialias: true, alpha: true }}
-      orthographic
-      camera={{
-        fov: 5,
-        near: 0.1,
-        far: 100,
-        zoom: 120,
-        position: [2, 2, 5],
-      }}
-      // onCreated={createCanvasHandler}
-    >
-      
+    <Canvas style={{backgroundColor: "black"}}>
       <Scenes />
     </Canvas>
   );

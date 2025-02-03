@@ -1,40 +1,29 @@
 import * as THREE from "three";
-import { useFrame, extend, useThree } from "@react-three/fiber";
-import { useRef } from "react";
-import { OrbitControls } from "three/examples/jsm/Addons.js";
-// import {OrbitControls} from "@react-three/drei"
-
-extend({ OrbitControls: OrbitControls });
+import { useFrame, useThree } from "@react-three/fiber";
+import { OrbitControls } from "@react-three/drei";
+import Custom from "./Custom";
 
 const Scenes = () => {
-  const cubeRef = useRef();
-  const planeRef = useRef();
-  const { gl, camera } = useThree();
-  // camera.position.x = 5
-
-  useFrame((state, delta) => {
-    // cubeRef.current.rotation.y += delta;
-    // planeRef.current.rotation.y += delta;
-    state.camera.position.x = Math.sin(state.clock.elapsedTime);
-  });
-
   return (
     <>
-      <orbitControls args={[camera, gl.domElement]} />
-      {/* <OrbitControls /> */}
-      {/* Plane */}
-      <mesh ref={planeRef} position-x={-2}>
-        <planeGeometry args={[2, 2]} />
-        <meshBasicMaterial color="green" side={THREE.DoubleSide} />
-      </mesh>
+      <OrbitControls />
 
-      {/* Cube */}
-      <mesh ref={cubeRef} position-x={2} rotation-y={Math.PI * 0.25}>
+      <Custom />
+
+      <mesh>
+        {/* <axesHelper args={[3]} />
+        <gridHelper args={[10, 10, "red", "gray"]} /> */}
         <boxGeometry />
-        <meshBasicMaterial color="green" />
+        <meshBasicMaterial color="green" side={THREE.DoubleSide} />
       </mesh>
     </>
   );
 };
 
 export default Scenes;
+
+// creating custom geometry
+// 1> create a Float32Array
+// 2> put a value in the array
+// 3> create a BufferAttribute using the Float32Array
+// 4> add a BufferAttribute to the attributes of BufferGeometry
